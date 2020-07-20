@@ -1,0 +1,24 @@
+{
+  "name": "agilechallenge-",
+  "version": "1.0.0",
+  "description": "to start app \r you will need to\r  npm install on api\r  yarn install on ui\r turn on your mongo engine\r and then \r  npm run dev on api\r  yarn start on ui",
+  "main": "index.js",
+  "scripts": {
+    "pre-start": "npm i && cd api && npm i && cd ../ui && npm i",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run pre-start && concurrently --kill-others \"cd api && npm start\" \"cd ui && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonasMillan/AgileChallenge-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonasMillan/AgileChallenge-/issues"
+  },
+  "homepage": "https://github.com/JonasMillan/AgileChallenge-#readme",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}

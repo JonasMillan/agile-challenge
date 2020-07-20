@@ -28,7 +28,7 @@ return (
 <div className={classes.root}>
 {
     data.map((e, i) => {
-        const color = (e.transactionType === 'debit') ? classes.debit : classes.credit
+        const color = (e.cardType === 'debit') ? classes.debit : classes.credit
         return(
             <ExpansionPanel key={i} className={color}>
                 <ExpansionPanelSummary
@@ -36,11 +36,11 @@ return (
                 aria-controls="panel2a-content"
                 id="panel2a-header"
                 >
-                <Typography className={classes.heading}>Transaction type: {e.transactionType}   mount: {e.amount}</Typography>
+                <Typography className={classes.heading}>Transaction type: {e.cardType}   mount: {e.amount}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                 <Typography>
-                    transactionType: {e.transactionType}
+                    Transaction Type: {e.cardType}
                     <br/>
                     amount: {e.amount}
                     <br/>

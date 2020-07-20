@@ -1,21 +1,26 @@
-const User = require("../models/user");
+const { Transactions} = require("../models");
+const { showUser } = require("../repository");
 
 
 const getAllTransactions = (req, res) => {
-    User.find().populate('transactions')
-    .exec((error, result) => {
-        if(error){
-          res.status(500).send({messsage:'Server Internal Error.', error});
-        }
-        if(!result){
-          res.status(404).send({messsage:'Transactions not found.'});
-        }
-        res.status(200).send({ result });
-      });
+  const {id} = req.params
+  const UserTransactions = [] 
+  Transactions.forEach(transaction => transaction.userId === id && UserTransactions.push(transaction))
+  res.status(200).send({UserTransactions})
 } 
 
+const getUserInfo = (req, res) => {
+  const {id} = req.params
+  const UserAcount = showUser(id)
+  if(UserAcount){
+    res.status(200).send({UserAcount})
+  }else{
+    res.status(404).send({messsage:'User not found'})
+  }
+}
 
 
 module.exports = {
   getAllTransactions,
+  getUserInfo
 }

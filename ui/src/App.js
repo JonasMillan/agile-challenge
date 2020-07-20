@@ -6,38 +6,42 @@ import './App.css';
 
 
 const App = () => {
-  const [data, setData] = useState({ hits: [] });
-
+  const [userTransactions, setData] = useState(null);
+  const [userData, setUserData] = useState(null);
+  
   useEffect(() => {
     const fetchData = async () => {
       const data = await API.userTransactions.getUsersTransactions()
-
-      setData(data.result);
+      const dataUser = await API.userTransactions.getUsersData()
+      setUserData(dataUser.UserAcount)
+      setData(data.UserTransactions);
     };
 
     fetchData();
   }, []);
-
-  let result = (data.length > 0) ? data[0] : false
-
+    const load = 'Loading'
     return (
-      <div>
-        <div className="App">
-        { result &&
+      <div className="App">
+       
+        { userData ?
           <CurrentAmount
-            name={result.name}
-            money={result.acountMount}
+          name={userData.name}
+          money={userData.acountMount}
           /> 
+          :
+          load
         }
-        </div>
-      { result &&
+
+      { userTransactions &&
         <Acordeon
-          data={result.transactions}
+        data={userTransactions}
         />
-      }
+        } 
       </div>
     )
 
 }
 
 export default App;
+
+
